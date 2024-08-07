@@ -102,7 +102,12 @@ public class ServerFileUtils {
         Map<String, List> allfiles = new HashMap<>();
         List<FileInfo> files = new ArrayList<>();
         List<String> directories = new ArrayList<>();
+
+        directories.add(".");
+        directories.add("..");
+
         path = getDirPath(path);
+        path = path.replace("//", "/");
         File file = new File(path);
         File[] tempList = file.listFiles();
         if (tempList != null) {
@@ -114,9 +119,11 @@ public class ServerFileUtils {
                     directories.add(tempList[i].getName());
                 }
             }
-            allfiles.put("files", files);
-            allfiles.put("directories", directories);
         }
+
+        allfiles.put("files", files);
+        allfiles.put("directories", directories);
+        
         return allfiles;
     }
 
