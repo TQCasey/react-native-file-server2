@@ -290,14 +290,18 @@ export default {
       this.axios
         .post("/api/getdirectoryallinfo", { path: this.dirs })
         .then(response => {
-          this.fileitem = response.data.files;
-          this.diritem = response.data.directories;
+
           this.spinning = false;
           this.spinning = false;
           this.selectdir = [];
           this.selectfile = [];
           this.ddselecttype = "";
           this.ddselectindex = null;
+
+          if (response.data.files && response.data.directories) {
+            this.fileitem = response.data.files;
+            this.diritem = response.data.directories;
+          }
         });
       this.getdiskinfo();
     },
@@ -307,13 +311,18 @@ export default {
       this.axios
         .post("/api/getdirectoryallinfo", { path: this.dirs })
         .then(response => {
-          this.fileitem = response.data.files;
-          this.diritem = response.data.directories;
+
           this.spinning = false;
           this.selectdir = [];
           this.selectfile = [];
           this.ddselecttype = "";
           this.ddselectindex = null;
+
+          if (response.data.files && response.data.directories) {
+            this.fileitem = response.data.files;
+            this.diritem = response.data.directories;
+          }
+
         });
         this.getdiskinfo();
     },
@@ -322,11 +331,15 @@ export default {
       this.axios
         .post("/api/getdirectoryallinfo", { path: this.dirs })
         .then(response => {
-          this.fileitem = response.data.files;
-          this.diritem = response.data.directories;
+          
           this.spinning = false;
           this.ddselecttype = "";
           this.ddselectindex = null;
+
+          if (response.data.files && response.data.directories) {
+            this.fileitem = response.data.files;
+            this.diritem = response.data.directories;
+          }
         });
         this.getdiskinfo();
     },

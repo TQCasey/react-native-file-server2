@@ -15,15 +15,18 @@
                 </a-button>
             </div>
         </a-layout-header>
+
+        <a-layout-footer class="g-footer">
+            <a-button icon="upload" :size="size" @click="uploadfile" block>Upload All</a-button>
+        </a-layout-footer>
+
         <a-layout-content class="g-content">
             <a-list>
                 <upload-item v-for="(item, index) in fileList" :itemdata="item" :index="index"
                     :key="item.file.lastModified + '' + index" :disable="disable" @removefile="removefile"></upload-item>
             </a-list>
         </a-layout-content>
-        <a-layout-footer class="g-footer">
-            <a-button icon="upload" :size="size" @click="uploadfile" block>Upload</a-button>
-        </a-layout-footer>
+
     </a-layout>
 </template>
 <script>
@@ -243,6 +246,8 @@ export default {
                         this.disable = false;
                     }
                 });
+            } else {
+                alert("No file to upload!");
             }
         }
     }
