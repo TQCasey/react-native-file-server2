@@ -68,7 +68,7 @@
               <a-button type="primary" icon="cloud-download" @click="downloadselectfile" />
               <a-modal></a-modal>
 
-              <a-button type="primary" icon="delete" @click="delfilevisible=true" />
+              <a-button type="primary" icon="delete" @click="deleteselectedfile" />
               <a-modal
                 title="Confirm"
                 @ok="removeAllSelectFile"
@@ -368,6 +368,7 @@ export default {
       }
     },
     removeAllSelectFile: function() {
+
       let filelist = [];
       let length = this.selectdir.length;
       for (let i = 0; i < length; i++) {
@@ -635,6 +636,11 @@ export default {
         });
     },
     downloadselectfile: function() {
+
+      if (this.selectfile.length === 0 && this.selectdir.length === 0) {
+        this.$message.error('Please select file or folder', 5);
+      }
+
       if (this.selectdir.length > 0) {
         this.$message.error('Can not download folder', 5);
       } else {
@@ -672,6 +678,15 @@ export default {
         }
       }
     },
+
+    deleteselectedfile : function() {
+      if (this.selectfile.length === 0 && this.selectdir.length === 0) {
+        this.$message.error('No selected file or folder', 5);
+        return ;
+      }
+      this.delfilevisible = true;
+    }
+    ,
     getdiskinfo: function() {
       this.axios.post("/api/getdiskinfo").then(response => {
         this.usedspace = response.data.usedspace;

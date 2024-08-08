@@ -247,7 +247,7 @@ export default {
                     }
                 });
             } else {
-                alert("No file to upload!");
+                this.$message.error('No file to upload!', 5);
             }
         }
     }
